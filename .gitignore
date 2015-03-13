@@ -1,0 +1,71 @@
+# Bower 
+# ------------------------------
+bower_components/*
+
+# Codekit 
+# ------------------------------
+*config.codekit
+
+# Default
+# ------------------------------
+*~
+.DS_Store
+*.bak
+Thumbs.db
+
+# Grunt
+# ------------------------------
+.ftppass
+.sftpCache.json
+.ftpCache.json
+
+# Project Specific 
+# ------------------------------
+login-face/vendors/*
+
+# Node 
+# ------------------------------
+node_modules/*
+
+# Sass cache
+# ------------------------------
+.sass-cache
+
+# Vagrant cache
+# ------------------------------
+.vagrant
+
+# large/disallowed file types
+# ------------------------------
+*.hqx
+*.bin
+*.exe
+*.dll
+*.deb
+*.dmg
+*.iso
+*.img
+*.msi
+*.msp
+*.msm
+*.mid
+*.midi
+*.kar
+*.mp3
+*.ogg
+*.m4a
+*.ra
+*.3gpp
+*.3gp
+*.mp4
+*.mpeg
+*.mpg
+*.mov
+*.webm
+*.flv
+*.m4v
+*.mng
+*.asx
+*.asf
+*.wmv
+*.avi

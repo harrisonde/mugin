@@ -1,0 +1,9 @@
+{
+  "name": "login-face",
+  "version": "0.0.1",
+  "dependencies": {
+    "webrtc" : "git://github.com/webrtc/samples.git",
+    "resemble" : "git://github.com/Huddle/Resemble.js.git"
+  },
+  "private": true
+}
