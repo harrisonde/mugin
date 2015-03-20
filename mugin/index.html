@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+		<title>Mugin</title>
+		<script type="text/javascript" src="vendors/resemble/resemble.js"></script>
+		<script type="text/javascript" src="/js/mugin.js"></script>
+	</head>
+	<body>
+		<style>
+			#mugin-video,
+			#mugin-photo{
+				height: 300px;
+				width: 400px;
+			}
+		</style>
+		<h1>Mugin</h1>
+		<h2>Say goodby to passwords. And use your mug to login.</h2>
+		<form novalidate onsubmit="return false;">
+			<video id="mugin-video" autoplay>
+				<p>Snap. Your browser does not support Mugin</p>
+			</video>
+			<lable>Email Address
+				<input class="btn btn-default">
+			</lable>
+			<button id="mugin-login" class="btn btn-default">
+    			Mugin ( Login )
+    		</button>
+    		<a href="view/register.html" id="mugin-login" class="btn btn-default">
+    			Register Your Mug
+    		</a>
+		</form>
+		<a href="vendors/webrtc/">webrtc</a>
+		<script>
+			// Use constructor method to create a new mugin
+			var myMugin = new Mugin();
+
+			window.onload = function(){
+				// As soon as the page loads, we need your mug
+				myMugin.go();
+
+				// Setup event listener for button click 
+				var submitBtn = document.getElementById('mugin-login');
+				submitBtn.onclick = function(){
+					// TBD	
+				};	
+			}
+			
+
+		</script>
+	</body>
+</html>
