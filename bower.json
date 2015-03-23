@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "dependencies": {
     "webrtc" : "git://github.com/webrtc/samples.git",
-    "resemble" : "git://github.com/Huddle/Resemble.js.git"
+    "resemble" : "git://github.com/Huddle/Resemble.js.git",
+    "bootstrap" : ">=3.3.4"
   },
   "private": true
 }

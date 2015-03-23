@@ -73,22 +73,30 @@ var Mugin = function(defaults){
 		
 		// Search for private image by username
 
-		// Compare private and public image(s)
+		/* 
+		* Compare private and public image(s) using reseble.js
+		* Add code for comparison by Huddle @ https://github.com/Huddle/Resemble.js
+		*
+		* @prams
+		*	privateMug (array)
+		*	publicMug (array)
+		*  
+		* @return
+		* 	misMatchPercentage : 100, // %
+		*   isSameDimensions: true, // or false
+		*   dimensionDifference: { width: 0, height: -1 }, // defined if dimensions are not the same
+		*   getImageDataUrl: function(){}
+		*/
+		var validationResponse = null;
 		var diff = resemble(privateMug).compareTo(publicMug).ignoreColors().onComplete(function(data){
-		    console.log(data);
-		    /*
-		    {
-		      misMatchPercentage : 100, // %
-		      isSameDimensions: true, // or false
-		      dimensionDifference: { width: 0, height: -1 }, // defined if dimensions are not the same
-		      getImageDataUrl: function(){}
-		    }
-		    */
+			
+			// Return difference score 
+			validationResponse = data;
+
 		});
 
-
-		// Return difference score, 
-
+		// Return response 
+		return validationResponse;
 
 	},
 
