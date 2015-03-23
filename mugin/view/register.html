@@ -3,7 +3,6 @@
 	<head>
 		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 		<title>Mugin</title>
-		<script type="text/javascript" src="/vendors/resemble/resemble.js"></script>
 		<script type="text/javascript" src="/js/mugin.js"></script>
 	</head>
 	<body>
@@ -15,11 +14,6 @@
 			<video id="mugin-video" autoplay>
 				<p>Snap. Your browser does not support Mugin</p>
 			</video>
-			<style>
-				canvas{
-					background-color: red;
-				}
-			</style>
 			<lable>First Name
 				<input class="btn btn-default">
 			</lable>
@@ -153,15 +147,13 @@
 
 				// create photo from video
 				var context = photo.getContext('2d');
-				
-					context.drawImage(video, 0, 0);
+				context.drawImage(video, 0, 0);
 
-					// Encoding photo data into base64 format
-					var photoURI = photo.toDataURL('image/png');
-					
-					// Store said photo
-					myMugin.setImage(photoURI, height, width);
+				// Encoding photo data into base64 format
+				var photoURI = photo.toDataURL('image/png');
 				
+				// Store said photo
+				myMugin.setImage(photoURI, height, width);
 			};
 		
 		</script>

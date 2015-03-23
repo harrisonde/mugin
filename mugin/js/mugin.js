@@ -63,19 +63,81 @@ var Mugin = function(defaults){
 	
 	},
 
-	this.validate = function(){
+	this.validate = function(publicMug){
 		
-		var privateMug = ''
-		var publicMug = null;
+		var privateMug = this.getMug('private') || null;
+		var publicMug = this.getMug('public') || null;
 
-
+		console.log('privateMug -> ' + privateMug);
+		console.log('publicMug -> ' + publicMug);
+		
 		// Search for private image by username
 
 		// Compare private and public image(s)
+		var diff = resemble(privateMug).compareTo(publicMug).ignoreColors().onComplete(function(data){
+		    console.log(data);
+		    /*
+		    {
+		      misMatchPercentage : 100, // %
+		      isSameDimensions: true, // or false
+		      dimensionDifference: { width: 0, height: -1 }, // defined if dimensions are not the same
+		      getImageDataUrl: function(){}
+		    }
+		    */
+		});
+
 
 		// Return difference score, 
 
 
+	},
+
+	this.getMug = function(mugType){
+
+		switch(mugType){
+			case 'public' :
+
+				var video =  document.querySelector('video'); 
+				var canvas = document.getElementById('mugin-photo');
+
+				// Set canvas height to video
+				canvas.setAttribute('height', 480);
+				canvas.setAttribute('width', 680);
+
+				// Draw image onto canvas
+				var context = canvas.getContext('2d');
+        		context.drawImage(video, 0,0 );
+				
+				// Get photo UIR
+				var URI = canvas.toDataURL('image/png');
+
+				return URI;
+
+			break;
+
+			case 'private' : 
+				/*
+				* Check for stored user image and add to UI.
+				*/
+				var localData = window.localStorage.getItem('dataStore');
+				
+				if(localData){
+
+					// create photo from local storage
+					var localStore = JSON.parse(localData);
+					var URI = localStore.location;
+
+					// Returns 64bit array
+					return URI;		
+				}
+			break;
+
+			default :
+				return 'Mugs are public or private' 
+			break;
+		}
+
+		
 	}
 
 };

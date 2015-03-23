@@ -7,15 +7,10 @@
 		<script type="text/javascript" src="/js/mugin.js"></script>
 	</head>
 	<body>
-		<style>
-			#mugin-video,
-			#mugin-photo{
-				height: 300px;
-				width: 400px;
-			}
-		</style>
+		
 		<h1>Mugin</h1>
 		<h2>Say goodby to passwords. And use your mug to login.</h2>
+		<canvas id="mugin-photo" height="480" width="680"></canvas>
 		<form novalidate onsubmit="return false;">
 			<video id="mugin-video" autoplay>
 				<p>Snap. Your browser does not support Mugin</p>
@@ -42,7 +37,7 @@
 				// Setup event listener for button click 
 				var submitBtn = document.getElementById('mugin-login');
 				submitBtn.onclick = function(){
-					// TBD	
+					myMugin.validate();	
 				};	
 			}
 			
