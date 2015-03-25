@@ -1,13 +1,13 @@
 /****************************************************************************
-* @filename      mugin.js
+* mugin.js
 * 
-* @author        Harrison DeStefano
-* @authorURI     harrisondestefano.come
+* Harrison DeStefano
+* harrisondestefano.com
 *
-* @description   Login using your mug
-* @dependencies  WebRTC, Resemble
-* @since	 	 March 14, 2015
-* @version       0.0.1
+* Login using your mug
+* WebRTC, Resemble
+* March 14, 2015
+* 0.0.1
 ****************************************************************************/
 
 'use strict';
@@ -18,14 +18,18 @@ var Mugin = function(defaults){
 		
 		constraints : {
 
-			audio: false,
+			webtrc: {
+			
+				audio: false,
 	  		
-	  		video: true
+	  			video: true
+	  		},
+
+	  		mugMatchLimit : 65 
 		},	
 		
 		el : function(){ return document.querySelector('video') }
-			
-		
+
 	},
 
 	this.go = function(){
@@ -36,7 +40,7 @@ var Mugin = function(defaults){
 		*/	
 		navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 		
-		navigator.getUserMedia(this.defaults.constraints, this.stream, this.fail);
+		navigator.getUserMedia(this.defaults.constraints.webtrc, this.stream, this.fail);
 
 	},
 
@@ -65,39 +69,33 @@ var Mugin = function(defaults){
 
 	this.validate = function(publicMug){
 		
+		// Private Variables
 		var privateMug = this.getMug('private') || null;
 		var publicMug = this.getMug('public') || null;
+		var misMatchPercentageLimit = this.defaults.constraints.mugMatchLimit;
+		var isMatch = null;
+		var calcConfidenceScore = function(misMatchPercentage){
+			return 100.00 - misMatchPercentage;
+		}
+		var howConfidence = null;
 
-		console.log('privateMug -> ' + privateMug);
-		console.log('publicMug -> ' + publicMug);
-		
-		// Search for private image by username
-
-		/* 
-		* Compare private and public image(s) using reseble.js
-		* Add code for comparison by Huddle @ https://github.com/Huddle/Resemble.js
-		*
-		* @prams
-		*	privateMug (array)
-		*	publicMug (array)
-		*  
-		* @return
-		* 	misMatchPercentage : 100, // %
-		*   isSameDimensions: true, // or false
-		*   dimensionDifference: { width: 0, height: -1 }, // defined if dimensions are not the same
-		*   getImageDataUrl: function(){}
-		*/
-		var validationResponse = null;
-		var diff = resemble(privateMug).compareTo(publicMug).ignoreColors().onComplete(function(data){
+		// Comparison by Huddle @ https://github.com/Huddle/Resemble.js
+		resemble(privateMug).compareTo(publicMug).ignoreColors().onComplete(function(data){
 			
-			// Return difference score 
-			validationResponse = data;
-
+			// The difference score
+			howConfidence = calcConfidenceScore(data.misMatchPercentage);
+				
+			// Boolean 
+			if(misMatchPercentageLimit >= parseInt(data.misMatchPercentage)){
+				isMatch = true;
+			}
+			else{
+				isMatch = false;
+			}
 		});
-
-		// Return response 
-		return validationResponse;
-
+		
+		return {match: isMatch, confidence: howConfidence };
+		
 	},
 
 	this.getMug = function(mugType){
@@ -144,7 +142,6 @@ var Mugin = function(defaults){
 				return 'Mugs are public or private' 
 			break;
 		}
-
 		
 	}
 
