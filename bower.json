@@ -1,5 +1,5 @@
 {
-  "name": "login-face",
+  "name": "mugin",
   "version": "0.0.1",
   "dependencies": {
     "webrtc" : "git://github.com/webrtc/samples.git",

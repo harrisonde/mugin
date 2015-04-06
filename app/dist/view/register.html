@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+		<title>Mugin</title>
+		<!-- Styles -->
+		<link rel="stylesheet" href="/vendors/bootstrap/dist/css/bootstrap.css">
+		<!-- Scripts -->
+		<script type="text/javascript" src="/js/mugin.js"></script>
+		<!-- Required for Bootstrap -->
+		<script type="text/javascript" src="/vendors/jquery/dist/jquery.js"></script>
+		<script type="text/javascript" src="/vendors/bootstrap/dist/js/bootstrap.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-7">
+					<h1>Mugin</h1>
+					<h2>Sign up here!</h2>
+					<!-- Login form -->
+					<form class="form-horizontal" novalidate onsubmit="return false;">
+						<div class="form-group">
+							<div class="col-sm-11 col-sm-offset-1">
+								<h3>I'm ready to use my mug!</h3>
+							</div>
+						</div>	
+						<div class="form-group">
+						    <label for="nameFirst" class="col-sm-2 control-label">First Name<span class="text-warning">*</span></label>
+						    <div class="col-sm-10">
+						      <input type="text" class="form-control" id="inputNameFirst" placeholder="First Name">
+						   	</div>
+						</div>
+						<div class="form-group">
+						    <label for="nameLast" class="col-sm-2 control-label">Last Name<span class="text-warning">*</span></label>
+						    <div class="col-sm-10">
+						      <input type="text" class="form-control" id="inputNameLast" placeholder="Last Name">
+						   	</div>
+						</div>
+						<div class="form-group">
+						    <label for="email" class="col-sm-2 control-label">Email<span class="text-warning">*</span></label>
+						    <div class="col-sm-10">
+						      <input type="email" class="form-control" id="inputEmail1" placeholder="Email">
+						   	</div>
+						</div>
+						<div class="form-group">
+						    <label for="email" class="col-sm-2 control-label">Confirm Email<span class="text-warning">*</span></label>
+						    <div class="col-sm-10">
+						      <input type="email" class="form-control" id="inputEmail2" placeholder="Confirm Email">
+						   	</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button id="mugin-register" class="btn btn-primary">
+									Sign up
+								</button>
+								<a href="/" id="mugin-login" class="btn btn-default">
+									Cancel
+								</a>
+							</div>
+						</div>		
+					</form>
+				</div>
+				<div class="col-sm-5">
+					<!-- Display video stream -->
+					<video id="mugin-video" class="img-responsive img-rounded bg-warning" autoplay>
+						<p>Snap. Your browser does not support Mugin</p>
+					</video>
+					<!-- Hidden canvas to fetch data from -->
+					<canvas id="mugin-photo"></canvas>
+				</div>		
+			</div>
+
+    	</div>
+		<script>
+
+			// Create new mugin via constructor method
+			var myMugin = new Mugin;
+			
+			// Add method to set image via prototype 
+			Mugin.prototype.setImage = function(uri, height, width){
+				/* 
+				 * Users data is updated on the front-end, no need append to storage.
+				 * Store a clean JSON object each time a new user is added.
+				*/
+				var jsonUserData = JSON.stringify({
+					location : uri,
+					height : height,
+					width : width
+				});
+				if(!window.localStorage.getItem('dataStore')){
+					// Write the object to localStorage
+					window.localStorage.setItem("dataStore", jsonUserData);
+				}
+				else{
+					window.localStorage.removeItem("dataStore");
+					window.localStorage.setItem("dataStore", jsonUserData);
+				}
+			};
+
+			// Add image to UI 
+			Mugin.prototype.drawImage = function(URI, width, height){
+
+				// Add image (stub for fallback)
+				function insertImg(URI){
+					/*
+					*	Add image to UI via img element and src attribute
+					*/
+					var photo = document.getElementById('mugin-photo');
+					
+					// Create new image
+					var userImage = new Image();
+					userImage.src = URI; 
+
+					// Add into DOM
+					photo.parentNode.insertBefore(userImage, photo);
+				}
+					
+				function insertCanvas(URI){
+					/*
+					* Add image to UI via canvas element
+					*/	
+
+					// Create new image
+					var userImage = new Image(width, height);
+					userImage.src = URI;
+					
+					// Setup event listener, wait for image to load
+					userImage.onload = function () {
+						
+						// Get the photo element
+						var photo = document.getElementById('mugin-photo');
+						
+						// Set image ratio attribute(s)
+						photo.setAttribute('width', 640);
+						photo.setAttribute('height', 480);
+
+						// Draw the image
+						var context = photo.getContext('2d');
+						context.drawImage(userImage, 0, 0);
+					};
+				}
+				
+				insertCanvas(URI);
+			}
+
+			// Add method to get stored image via prototype
+			Mugin.prototype.getImage = function(){
+				/*
+				* Check for stored user image and add to UI.
+				*/
+				var localData = window.localStorage.getItem('dataStore');
+				
+				if(localData){
+
+					// create photo from local storage
+					var localStore = JSON.parse(localData);
+					var width = localStore.width;
+					var height = localStore.height;
+					var URI = localStore.location;
+
+					Mugin.prototype.drawImage(URI, width, height);	
+					
+				}
+			};
+
+			// Get stored mug and capter new one too.
+			window.onload = function(){
+				myMugin.go();
+				myMugin.getImage();
+			}
+			
+			// Register event listener and function to do the magic
+			var submitBtn = document.getElementById('mugin-register');
+			submitBtn.onclick = function(){
+				
+				var video = document.getElementById('mugin-video');
+				var photo = document.getElementById('mugin-photo');
+				
+				// get intrinsic 
+				// https://html.spec.whatwg.org/multipage/embedded-content.html#the-video-element
+				var height = video.videoWidth;
+				var width = video.videoHeight;
+				var ratio = video.videoHeight / (video.videoWidth/width);
+
+				// create photo from video
+				var context = photo.getContext('2d');
+				context.drawImage(video, 0, 0);
+
+				// Encoding photo data into base64 format
+				var photoURI = photo.toDataURL('image/png');
+				
+				// Store said photo
+				myMugin.setImage(photoURI, height, width);
+			};
+		
+		</script>
+	</body>
+</html>

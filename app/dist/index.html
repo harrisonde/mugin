@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+		<title>Mugin</title>
+		<!-- Styles -->
+		<link rel="stylesheet" href="/css/vendor.css">
+		<link rel="stylesheet" href="/css/main.css">
+		<!-- App Scripts -->
+		<script type="text/javascript" src="js/resemble/resemble.js"></script>
+		<script type="text/javascript" src="js/mugin/mugin.js"></script>
+		<!-- Required for Bootstrap 
+		<script type="text/javascript" src="js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="/js/bootstrap/bootstrap.js"></script>
+		-->
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<h1>Mugin</h1>
+					<h2>Say goodby to passwords, use your mug to login.</h2>
+					<div class="row">
+
+					<div class="col-sm-8">
+						<!-- Login form -->
+						<form class="form-horizontal" novalidate onsubmit="return false;">
+							<div class="form-group">
+								<div class="col-sm-11 col-sm-offset-1">
+									<h3>I'm ready to use my mug!</h3>
+								</div>
+							</div>	
+							<div class="form-group">
+								<div class="col-sm-10 col-sm-offset-2">
+									<!-- Display video stream -->
+									<video id="mugin-video" class="img-responsive img-rounded bg-warning" autoplay>
+										<p>Snap. Your browser does not support Mugin</p>
+									</video>
+									<!-- Hidden canvas to fetch data from -->
+									<canvas id="mugin-photo" class="hidden" height="480" width="680"></canvas>
+								</div>
+							</div>
+							
+							<div class="form-group">
+							    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+							    <div class="col-sm-10">
+							      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+							   	</div>
+							</div>
+							<div class="form-group">
+    							<div class="col-sm-offset-2 col-sm-10">
+									<button id="mugin-login" class="btn btn-primary">
+										Login
+									</button>
+									<a href="view/register.html" id="mugin-login" class="btn btn-default">
+										Sign Up
+									</a>
+								</div>
+							</div>		
+						</form>
+					</div>
+					<div class="col-sm-4">
+						<h4>Mugin Statistics</h4>
+						<!-- Display mugin status on UI-->
+						<div id="mugin-stats">
+							<ul class="list-group">
+							  <li class="list-group-item">
+							    <span id="mugin-stats-login" class="badge">Logged Out</span>
+							    Status
+							  </li>
+							  <li class="list-group-item">
+							    <span id="mugin-stats-attempt" class="badge">0</span>
+							    Login Attempts
+							  </li>
+							  <li class="list-group-item">
+							    <span id="mugin-stats-confidence" class="badge">0</span>
+							    Match Confidence
+							  </li>
+							  
+							</ul>
+						</div>
+					</div>
+					<div class="row footer">
+						<div class="col-sm-12">
+							<a href="vendors/webrtc/">webrtc</a>
+						</div>
+					</div>
+					
+					<script>
+						// Use constructor method to create a new mugin
+						var myMugin = new Mugin();
+
+						window.onload = function(){
+
+							// As soon as the page loads, we need your mug!
+							myMugin.go();
+
+							// Setup event listener for button click 
+							var submitBtn = document.getElementById('mugin-login');
+							submitBtn.onclick = function(){
+								var validateResponse = myMugin.validate();
+
+								// Following is not required for Mugin core, syntatic sugar
+								myMugin.history.set();
+								panelUi(validateResponse);
+							};
+						}
+
+						// Following is not required for Mugin core, more syntatic sugar
+						// Count the login attempts
+						myMugin.history = {
+							get : function(){
+								return this.loginAttempts;
+							},
+							set : function(){
+								this.loginAttempts = this.loginAttempts + 1 || 1;
+							}
+						}
+
+						// Modify DOM to show mugin response
+						function panelUi(validateResponse){
+							var loginBadge = document.getElementById('mugin-stats-login');
+							var countBadge = document.getElementById('mugin-stats-attempt');
+							var confidenceBadge = document.getElementById('mugin-stats-confidence');
+
+							// Only update the following if we have a response
+							if(validateResponse){
+
+								// Set UI elements
+								if(validateResponse.match){
+									// Set Confidence 
+									confidenceBadge.innerHTML = validateResponse.confidence;
+									// Set Login Status
+									loginBadge.innerHTML = 'Logged In';
+								}
+								else{
+									// Set confidence 
+									confidenceBadge.innerHTML = '0';
+									// Set Login Status
+									loginBadge.innerHTML = 'Logged Out';
+								}
+							}
+
+							//  Set Count Badge
+							countBadge.innerHTML = myMugin.history.get();
+							
+						}
+
+
+
+					</script>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

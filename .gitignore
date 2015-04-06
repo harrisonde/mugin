@@ -1,3 +1,8 @@
+# App
+# ------------------------------
+app/dist/css/*
+app/dist/js/*
+
 # Bower 
 # ------------------------------
 bower_components/*
