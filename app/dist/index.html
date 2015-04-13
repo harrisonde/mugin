@@ -9,6 +9,7 @@
 		<!-- App Scripts -->
 		<script type="text/javascript" src="js/resemble/resemble.js"></script>
 		<script type="text/javascript" src="js/mugin/mugin.js"></script>
+		<script type="text/javascript" src="js/mugin/mugin-index.js"></script>
 		<!-- Required for Bootstrap 
 		<script type="text/javascript" src="js/jquery/jquery.js"></script>
 		<script type="text/javascript" src="/js/bootstrap/bootstrap.js"></script>
@@ -21,7 +22,6 @@
 					<h1>Mugin</h1>
 					<h2>Say goodby to passwords, use your mug to login.</h2>
 					<div class="row">
-
 					<div class="col-sm-8">
 						<!-- Login form -->
 						<form class="form-horizontal" novalidate onsubmit="return false;">
@@ -85,70 +85,6 @@
 							<a href="vendors/webrtc/">webrtc</a>
 						</div>
 					</div>
-					
-					<script>
-						// Use constructor method to create a new mugin
-						var myMugin = new Mugin();
-
-						window.onload = function(){
-
-							// As soon as the page loads, we need your mug!
-							myMugin.go();
-
-							// Setup event listener for button click 
-							var submitBtn = document.getElementById('mugin-login');
-							submitBtn.onclick = function(){
-								var validateResponse = myMugin.validate();
-
-								// Following is not required for Mugin core, syntatic sugar
-								myMugin.history.set();
-								panelUi(validateResponse);
-							};
-						}
-
-						// Following is not required for Mugin core, more syntatic sugar
-						// Count the login attempts
-						myMugin.history = {
-							get : function(){
-								return this.loginAttempts;
-							},
-							set : function(){
-								this.loginAttempts = this.loginAttempts + 1 || 1;
-							}
-						}
-
-						// Modify DOM to show mugin response
-						function panelUi(validateResponse){
-							var loginBadge = document.getElementById('mugin-stats-login');
-							var countBadge = document.getElementById('mugin-stats-attempt');
-							var confidenceBadge = document.getElementById('mugin-stats-confidence');
-
-							// Only update the following if we have a response
-							if(validateResponse){
-
-								// Set UI elements
-								if(validateResponse.match){
-									// Set Confidence 
-									confidenceBadge.innerHTML = validateResponse.confidence;
-									// Set Login Status
-									loginBadge.innerHTML = 'Logged In';
-								}
-								else{
-									// Set confidence 
-									confidenceBadge.innerHTML = '0';
-									// Set Login Status
-									loginBadge.innerHTML = 'Logged Out';
-								}
-							}
-
-							//  Set Count Badge
-							countBadge.innerHTML = myMugin.history.get();
-							
-						}
-
-
-
-					</script>
 				</div>
 			</div>
 		</div>
