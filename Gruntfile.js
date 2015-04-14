@@ -27,6 +27,17 @@ module.exports = function(grunt) {
 					}
 				]
 			},
+			cookies: {
+				files: [
+					{
+						expand: true,
+						cwd: '<%= app.srcDir %>/vendors/cookies/js/',
+						src: ['**/*'],
+						dest: '<%= app.distDir %>/js/cookies/',
+						flatten: false
+					}
+				]
+			},
 			mugin: {
 				files: [
 					{

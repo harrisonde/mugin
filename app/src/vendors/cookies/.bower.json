@@ -1,0 +1,13 @@
+{
+  "name": "cookies",
+  "homepage": "https://github.com/harrisonde/cookies",
+  "_release": "fab9beaf62",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "fab9beaf6270c4f76758464631e2a959306391e3"
+  },
+  "_source": "git://github.com/harrisonde/cookies.git",
+  "_target": "*",
+  "_originalSource": "git://github.com/harrisonde/cookies.git"
+}

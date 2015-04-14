@@ -1,11 +1,11 @@
 {
   "name": "webrtc",
   "homepage": "https://github.com/webrtc/samples",
-  "_release": "56b397502e",
+  "_release": "cff50e45f9",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "56b397502ea36e9ea248138ae1427cd9ffacd779"
+    "commit": "cff50e45f97bb0e9c7bc87f11927740cc0d15da5"
   },
   "_source": "git://github.com/webrtc/samples.git",
   "_target": "*",

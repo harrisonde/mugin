@@ -25,6 +25,17 @@ window.onload = function(){
 		myMugin.history.set();
 		panelUi(validateResponse);
 	};
+
+	// Check for any cookies we might need to handel
+	if(getCookie('registration') !== 1){
+		removeCookie('registration');
+		var newDiv = document.createElement('div'); 
+		newDiv.setAttribute('class', 'alert-success');
+		var newMessage = document.createTextNode('Success! Please use your mug to login.'); 
+ 		newDiv.appendChild(newMessage);
+		var body = document.getElementById('mugin'); 
+ 		body.insertBefore(newDiv, body.childNodes[0]);
+	}
 }
 
 // Following is not required for Mugin core, more syntatic sugar

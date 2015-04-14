@@ -165,6 +165,9 @@ window.onload = function(){
 		    		if(f[i].value.length === 0){
 		    			errors.push('Email confirmation is required.');
 		    		}
+		    		else if( f[i].value !== f[i-1].value ){
+		    			errors.push('Email must match');
+		    		}
 		    	break;
 		    }
 		}
@@ -194,6 +197,10 @@ window.onload = function(){
  			body.insertBefore(newDiv, body.childNodes[0]);
 			var body = document.getElementById('registration'); 
  			window.scrollTo(0, 0);
+		}
+		else{
+			setCookie('registration','complete');
+			window.location = '/';
 		}
 		
 	};
