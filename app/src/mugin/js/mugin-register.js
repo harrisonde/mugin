@@ -96,113 +96,110 @@ Mugin.prototype.getImage = function(){
 };
 
 // Get stored mug and capter new one too.
-window.onload = function(){
-	myMugin.go();
-	myMugin.getImage();
+myMugin.go();
+myMugin.getImage();
 
-	// Register event listener and function to do the magic
-	var submitBtn = document.getElementById('mugin-register');
-	submitBtn.addEventListener('click', setMyMug, false);
+// Register event listener and function to do the magic
+var submitBtn = document.getElementById('mugin-register');
+submitBtn.addEventListener('click', setMyMug, false);
 
-	function setMyMug(){	
+function setMyMug(){	
+	
+	var isStreaming = window.stream || false;
+
+	if(isStreaming){
+		var video = document.getElementById('mugin-video');
+		var photo = document.getElementById('mugin-photo');
 		
-		var isStreaming = window.stream || false;
+		// get intrinsic 
+		// https://html.spec.whatwg.org/multipage/embedded-content.html#the-video-element
+		var height = video.videoWidth;
+		var width = video.videoHeight;
+		var ratio = video.videoHeight / (video.videoWidth/width);
 
-		if(isStreaming){
-			var video = document.getElementById('mugin-video');
-			var photo = document.getElementById('mugin-photo');
-			
-			// get intrinsic 
-			// https://html.spec.whatwg.org/multipage/embedded-content.html#the-video-element
-			var height = video.videoWidth;
-			var width = video.videoHeight;
-			var ratio = video.videoHeight / (video.videoWidth/width);
+		// create photo from video
+		var context = photo.getContext('2d');
+		context.drawImage(video, 0, 0);
 
-			// create photo from video
-			var context = photo.getContext('2d');
-			context.drawImage(video, 0, 0);
+		// Encoding photo data into base64 format
+		var photoURI = photo.toDataURL('image/png');
 
-			// Encoding photo data into base64 format
-			var photoURI = photo.toDataURL('image/png');
-
-			// Store said photo 
-			myMugin.setImage(photoURI, height, width);
-		}
-
-		validate();
+		// Store said photo 
+		myMugin.setImage(photoURI, height, width);
 	}
-	// validate the form
-	function validate(){
-		var errors = [];
-		var f = document.forms[0];
-		// clear old errors
-		var oldErrorElm = document.getElementById('error');
-		if(oldErrorElm){
-			oldErrorElm.remove();
-		}
-		for(var i = 0; i < f.elements.length; i++){
-		    switch(f[i].id)
-		    {
-		    	case 'nameFirst':
-		    		if(f[i].value.length === 0){
-		    			errors.push('First name is required');
-		    		}
-		    	break;
-		    	
-		    	case 'nameLast':
-		    		if(f[i].value.length === 0){
-		    			errors.push('Last name is required');
-		    		}
-		    	break;
-		    	
-		    	case 'email':
-		    		if(f[i].value.length === 0){
-		    			errors.push('Email is required');
-		    		}
-		    	break;
 
-		    	case 'email-confirm':
-		    		if(f[i].value.length === 0){
-		    			errors.push('Email confirmation is required.');
-		    		}
-		    		else if( f[i].value !== f[i-1].value ){
-		    			errors.push('Email must match');
-		    		}
-		    	break;
-		    }
-		}
-		// Validate we have a  Mug
-		var localData = window.localStorage.getItem('dataStore');
-		if(localData){
-			var localStore = JSON.parse(localData);
-			var URI = localStore.location;
-			if(!URI){
-				errors.push('Your Mug is required.');
-			}
-		}else{
-			errors.push('We don\'t have your Mug - it is required.');
-		}
-
-		// Check and display Errors
-		if(errors.length > 0){
-			var newDiv = document.createElement('ul'); 
-			newDiv.setAttribute('id', 'error');
-			for(err in errors){
-				var newListItem = document.createElement('li');
-				var newError = document.createTextNode(errors[err]); 
- 				newListItem.appendChild(newError);
- 				newDiv.appendChild(newListItem);
-			}
-			var body = document.getElementById('registration'); 
- 			body.insertBefore(newDiv, body.childNodes[0]);
-			var body = document.getElementById('registration'); 
- 			window.scrollTo(0, 0);
-		}
-		else{
-			setCookie('registration','complete');
-			window.location = '/';
-		}
-		
-	};
-
+	validate();
 }
+// validate the form
+function validate(){
+	var errors = [];
+	var f = document.forms[0];
+	// clear old errors
+	var oldErrorElm = document.getElementById('error');
+	if(oldErrorElm){
+		oldErrorElm.remove();
+	}
+	for(var i = 0; i < f.elements.length; i++){
+	    switch(f[i].id)
+	    {
+	    	case 'nameFirst':
+	    		if(f[i].value.length === 0){
+	    			errors.push('First name is required');
+	    		}
+	    	break;
+	    	
+	    	case 'nameLast':
+	    		if(f[i].value.length === 0){
+	    			errors.push('Last name is required');
+	    		}
+	    	break;
+	    	
+	    	case 'email':
+	    		if(f[i].value.length === 0){
+	    			errors.push('Email is required');
+	    		}
+	    	break;
+
+	    	case 'email-confirm':
+	    		if(f[i].value.length === 0){
+	    			errors.push('Email confirmation is required.');
+	    		}
+	    		else if( f[i].value !== f[i-1].value ){
+	    			errors.push('Email must match');
+	    		}
+	    	break;
+	    }
+	}
+	// Validate we have a  Mug
+	var localData = window.localStorage.getItem('dataStore');
+	if(localData){
+		var localStore = JSON.parse(localData);
+		var URI = localStore.location;
+		if(!URI){
+			errors.push('Your Mug is required.');
+		}
+	}else{
+		errors.push('We don\'t have your Mug - it is required.');
+	}
+
+	// Check and display Errors
+	if(errors.length > 0){
+		var newDiv = document.createElement('ul'); 
+		newDiv.setAttribute('id', 'error');
+		for(err in errors){
+			var newListItem = document.createElement('li');
+			var newError = document.createTextNode(errors[err]); 
+				newListItem.appendChild(newError);
+				newDiv.appendChild(newListItem);
+		}
+		var body = document.getElementById('registration'); 
+			body.insertBefore(newDiv, body.childNodes[0]);
+		var body = document.getElementById('registration'); 
+			window.scrollTo(0, 0);
+	}
+	else{
+		setCookie('registration','complete');
+		window.location = '/';
+	}
+	
+};

@@ -11,31 +11,28 @@
 // Use constructor method to create a new mugin
 var myMugin = new Mugin();
 
-window.onload = function(){
+// As soon as the page loads, we need your mug!
+myMugin.go();
 
-	// As soon as the page loads, we need your mug!
-	myMugin.go();
+// Setup event listener for button click 
+var submitBtn = document.getElementById('mugin-login');
+submitBtn.onclick = function(){
+	var validateResponse = myMugin.validate();
 
-	// Setup event listener for button click 
-	var submitBtn = document.getElementById('mugin-login');
-	submitBtn.onclick = function(){
-		var validateResponse = myMugin.validate();
+	// Following is not required for Mugin core, syntatic sugar
+	myMugin.history.set();
+	panelUi(validateResponse);
+};
 
-		// Following is not required for Mugin core, syntatic sugar
-		myMugin.history.set();
-		panelUi(validateResponse);
-	};
-
-	// Check for any cookies we might need to handel
-	if(getCookie('registration') !== 1){
-		removeCookie('registration');
-		var newDiv = document.createElement('div'); 
-		newDiv.setAttribute('class', 'alert-success');
-		var newMessage = document.createTextNode('Success! Please use your mug to login.'); 
- 		newDiv.appendChild(newMessage);
-		var body = document.getElementById('mugin'); 
- 		body.insertBefore(newDiv, body.childNodes[0]);
-	}
+// Check for any cookies we might need to handel
+if(getCookie('registration') !== 1){
+	removeCookie('registration');
+	var newDiv = document.createElement('div'); 
+	newDiv.setAttribute('class', 'alert-success');
+	var newMessage = document.createTextNode('Success! Please use your mug to login.'); 
+		newDiv.appendChild(newMessage);
+	var body = document.getElementById('mugin'); 
+		body.insertBefore(newDiv, body.childNodes[0]);
 }
 
 // Following is not required for Mugin core, more syntatic sugar
@@ -64,6 +61,8 @@ function panelUi(validateResponse){
 			confidenceBadge.innerHTML = validateResponse.confidence;
 			// Set Login Status
 			loginBadge.innerHTML = 'Logged In';
+			var newUser = {"user" : { "status" : 'true' }};
+			setCookie('user', JSON.stringify(newUser) );
 		}
 		else{
 			// Set confidence 
