@@ -54,7 +54,6 @@ function panelUi(validateResponse){
 
 	// Only update the following if we have a response
 	if(validateResponse){
-
 		// Set UI elements
 		if(validateResponse.match){
 			// Set Confidence 
@@ -63,6 +62,7 @@ function panelUi(validateResponse){
 			loginBadge.innerHTML = 'Logged In';
 			var newUser = {"user" : { "status" : 'true' }};
 			setCookie('user', JSON.stringify(newUser) );
+			window.location = '/#/profile';
 		}
 		else{
 			// Set confidence 

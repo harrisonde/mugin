@@ -13,7 +13,7 @@
 
 var Router = function(){
 	
-	var resource = {
+	var resources = {
 		"404" : {
 			"path" : "404.html"
 		},
@@ -22,16 +22,15 @@ var Router = function(){
 		},
 		"profile":{
 			"path" : "profile.html",
-			"role" : "loggedin"
+			"authorization" : "true"
 		},
 		"register" : {
-			"path":"register.html",
-			"role": "loggedout"
+			"path":"register.html"
 		}
 	};
 
 	this.getResource = function(location){
-
+		// Navigation based on hash
 		if(window.location.hash === ''){
 			location = 'index';
 		}
@@ -40,16 +39,19 @@ var Router = function(){
 		}
 
 		// get path
-		var path;
-		for(var r in resource){
+		// to do: clean up = move path into resource
+		var path, resource;
+		for(var r in resources){
 			if(r === location){
-				path = 'view/'+resource[r].path;
+				resource = resources[r];
+				path = 'view/'+resources[r].path;
 			}
 		}
 		// handel unknown resource request
 		if(path === undefined){
-			path = 'view/'+resource['404'].path;
+			path = 'view/'+resources['404'].path;
 		}
+		
 		// make request
 		var xhr = new XMLHttpRequest();
 		xhr.open("GET", path); 
@@ -60,7 +62,7 @@ var Router = function(){
 	    		// inject html
 				var body = document.getElementById('mugin'); 
  				body.innerHTML = html;
- 				// add script(s), if any
+ 				// Add script(s), if any
  				var childern = document.body.children;
  				for(var c in childern){
  					if( childern[c].tagName === 'CTRL'){
@@ -69,7 +71,6 @@ var Router = function(){
  						body.appendChild(script);
  					}
  				}
-
 	    	}else if(this.status == 0){
 	    		// inject html
 	    		html = 'Error loading request.'; 

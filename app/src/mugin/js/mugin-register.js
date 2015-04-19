@@ -6,8 +6,9 @@
 *
 * Creates a new mugin and form validation
 * mugin.js
-* April 11, 2015
+* April 19, 2015
 ***************************************************************************/
+'use strict';
 
 var myMugin = new Mugin;
 
@@ -186,7 +187,7 @@ function validate(){
 	if(errors.length > 0){
 		var newDiv = document.createElement('ul'); 
 		newDiv.setAttribute('id', 'error');
-		for(err in errors){
+		for(var err in errors){
 			var newListItem = document.createElement('li');
 			var newError = document.createTextNode(errors[err]); 
 				newListItem.appendChild(newError);
@@ -199,7 +200,47 @@ function validate(){
 	}
 	else{
 		setCookie('registration','complete');
-		window.location = '/';
+		// Store user data
+		storeUser(f);
+        window.location = '/';
 	}
 	
 };
+// store user data
+function storeUser(formElm){
+	var f = formElm, fName, lName, eMail;
+	for(var i = 0; i < f.elements.length; i++){
+	    switch(f[i].id)
+	    {
+	    	case 'nameFirst':
+	    		fName = f[i].value;
+	    	break;
+	    	
+	    	case 'nameLast':
+	    		lName = f[i].value;
+	    	break;
+	    	
+	    	case 'email':
+	    		eMail = f[i].value;
+	    	break;
+	    }
+	}
+	/* 
+	 * Users data is updated on the front-end, no need append to storage.
+	 * Store a clean JSON object each time a new user is added.
+	*/
+	var jsonUserData = JSON.stringify({
+		nameLast : lName,
+		nameFirst : fName,
+		eMail : eMail
+	});
+	if(!window.localStorage.getItem('userStore')){
+		// Write the object to localStorage
+		window.localStorage.setItem("userStore", jsonUserData);
+	}
+	else{
+		window.localStorage.removeItem("userStore");
+		window.localStorage.setItem("userStore", jsonUserData);
+	}
+
+}
