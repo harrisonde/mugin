@@ -17,26 +17,22 @@ myMugin.go();
 // Setup event listener for button click 
 var submitBtn = document.getElementById('mugin-login');
 submitBtn.onclick = function(){
-	var validateResponse = myMugin.validate();
-
-	// Following is not required for Mugin core, syntatic sugar
 	myMugin.history.set();
-	panelUi(validateResponse);
+	validate();
 };
 
 // Check for any cookies we might need to handel
 if(getCookie('registration') !== 1){
 	removeCookie('registration');
 	var newDiv = document.createElement('div'); 
-	newDiv.setAttribute('class', 'alert-success');
+	newDiv.setAttribute('id', 'message');
+	newDiv.setAttribute('class', 'alert alert-success');
 	var newMessage = document.createTextNode('Success! Please use your mug to login.'); 
 		newDiv.appendChild(newMessage);
-	var body = document.getElementById('mugin'); 
+	var body = document.getElementById('login'); 
 		body.insertBefore(newDiv, body.childNodes[0]);
 }
 
-// Following is not required for Mugin core, more syntatic sugar
-// Count the login attempts
 myMugin.history = {
 	get : function(){
 		return this.loginAttempts;
@@ -46,33 +42,65 @@ myMugin.history = {
 	}
 }
 
-// Modify DOM to show mugin response
-function panelUi(validateResponse){
-	var loginBadge = document.getElementById('mugin-stats-login');
-	var countBadge = document.getElementById('mugin-stats-attempt');
-	var confidenceBadge = document.getElementById('mugin-stats-confidence');
-
-	// Only update the following if we have a response
-	if(validateResponse){
-		// Set UI elements
-		if(validateResponse.match){
-			// Set Confidence 
-			confidenceBadge.innerHTML = validateResponse.confidence;
-			// Set Login Status
-			loginBadge.innerHTML = 'Logged In';
-			var newUser = {"user" : { "status" : 'true' }};
-			setCookie('user', JSON.stringify(newUser) );
-			window.location = '/#/profile?status=loggedin&confidence='+validateResponse.confidence;
-		}
-		else{
-			// Set confidence 
-			confidenceBadge.innerHTML = '0';
-			// Set Login Status
-			loginBadge.innerHTML = 'Logged Out';
-		}
-	}
-
-	//  Set Count Badge
-	countBadge.innerHTML = myMugin.history.get();
+// Form validation
+function validate(){
+	var errors = [];
+	var f = document.forms[0];
 	
-}
+	// Validate form
+	for(var i = 0; i < f.elements.length; i++){
+	    if(f[i].id === 'email'){
+	    	if(f[i].value.length === 0){
+	    		errors.push('Email is required');
+	    	}
+	    	else{
+		    	var localData = window.localStorage.getItem('userStore');
+				if(localData){
+					var localStore = JSON.parse(localData);
+					var userEmail = localStore.eMail;
+					// simple case insensitive comparison
+					if(userEmail.toLowerCase() !== f[i].value.toLowerCase()){
+						errors.push('The email or mug you entered is incorrect.');
+					}
+				}
+		    }
+	    }
+	}
+	// Validate mug
+	var validateResponse = myMugin.validate();
+	if(!validateResponse){
+		errors.push('We can not verify your mug.');
+	}
+	
+	// Check and display Errors
+	if(errors.length > 0){
+		
+		// Clear old errors
+		var oldErrorElm = document.getElementById('message');
+		if(oldErrorElm){
+			oldErrorElm.remove();
+		}
+		//  Set Count Badge
+		var countBadge = document.getElementById('mugin-stats-attempt');
+		countBadge.innerHTML = myMugin.history.get();
+		
+		// Display errors
+		var newDiv = document.createElement('ul'); 
+		newDiv.setAttribute('id', 'message');
+		newDiv.setAttribute('class', 'alert alert-danger');
+		for(var err in errors){
+			var newListItem = document.createElement('li');
+			var newError = document.createTextNode(errors[err]); 
+				newListItem.appendChild(newError);
+				newDiv.appendChild(newListItem);
+		}
+		var body = document.getElementById('login'); 
+			body.insertBefore(newDiv, body.childNodes[0]);
+			window.scrollTo(0, 0);
+	}
+	else{
+		var newUser = {"user" : { "status" : 'true' }};
+		setCookie('user', JSON.stringify(newUser) );
+		window.location = '/#/profile?status=loggedin&confidence='+validateResponse.confidence;
+	}
+};

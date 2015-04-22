@@ -136,7 +136,7 @@ function validate(){
 	var errors = [];
 	var f = document.forms[0];
 	// clear old errors
-	var oldErrorElm = document.getElementById('error');
+	var oldErrorElm = document.getElementById('message');
 	if(oldErrorElm){
 		oldErrorElm.remove();
 	}
@@ -186,7 +186,8 @@ function validate(){
 	// Check and display Errors
 	if(errors.length > 0){
 		var newDiv = document.createElement('ul'); 
-		newDiv.setAttribute('id', 'error');
+		newDiv.setAttribute('id', 'message');
+		newDiv.setAttribute('class', 'alert alert-danger');
 		for(var err in errors){
 			var newListItem = document.createElement('li');
 			var newError = document.createTextNode(errors[err]); 
@@ -194,8 +195,7 @@ function validate(){
 				newDiv.appendChild(newListItem);
 		}
 		var body = document.getElementById('registration'); 
-			body.insertBefore(newDiv, body.childNodes[0]);
-		var body = document.getElementById('registration'); 
+			body.insertBefore(newDiv, body.childNodes[0]); 
 			window.scrollTo(0, 0);
 	}
 	else{

@@ -17,14 +17,14 @@ Well, yes - you absolutely should ask. This repository holds one JavaScript appl
 	* [ ] Profile View
 
 ## Development List Items
-	* [ ] Style register error warnings
+	* [X] Style register validatoin errors
 	* [ ] Add favicon to project root
-	* [ ] Login in with mug and email
-	* [ ] Do not show login form if logged in
+	* [X] Login in with mug and email
+	* [ ] Do not show login form if logged in (redirect to profile);
 	* [X] Disable inputs on profile
 	* [X] Pass mugin stats in url
 	* [X] Read mugin stats from url into UI
-	* [ ] Display validaion errors on index when loggin
+	* [X] Display validaion errors on index when loggin
 
 	
 ## Install
