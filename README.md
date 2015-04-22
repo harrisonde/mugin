@@ -4,10 +4,9 @@
 Mugin makes loging into your web applicaions dead simple, just use your mug.
 
 ## Expectation
-Expect to experience using your mug to login into a simple applicion.
+Login into a simple applicion with your mug (face).
 
 ## What is in this repository might I ask?
-
 Well, yes - you absolutely should ask. This repository holds one JavaScript applicaion, Mugin, which includes:
 	* Super clean responsive user interface
 	* ...
@@ -15,6 +14,18 @@ Well, yes - you absolutely should ask. This repository holds one JavaScript appl
 ## Features
 	* [ ] Login View
 	* [ ] Register View
+	* [ ] Profile View
+
+## Development List Items
+	* [ ] Style register error warnings
+	* [ ] Add favicon to project root
+	* [ ] Login in with mug and email
+	* [ ] Do not show login form if logged in
+	* [X] Disable inputs on profile
+	* [X] Pass mugin stats in url
+	* [X] Read mugin stats from url into UI
+	* [ ] Display validaion errors on index when loggin
+
 	
 ## Install
 	* Grunt

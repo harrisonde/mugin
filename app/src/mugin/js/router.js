@@ -36,6 +36,9 @@ var Router = function(){
 		}
 		else{
 			var location = window.location.hash.split('/')[1];
+			if(location.indexOf('?')){
+				location = location.split('?')[0];
+			}
 		}
 
 		// get path

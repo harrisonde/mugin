@@ -90,6 +90,24 @@ var myMugin = new Mugin;
 myMugin.getImage();
 myMugin.user();
 
+// Show login stastics
+var loginBadge = document.getElementById('mugin-stats-login');
+var confidenceBadge = document.getElementById('mugin-stats-confidence');
+var qString = window.location.hash.split('?')[1].split('&');
+for(var q in qString){
+	var k = qString[q].split('=')[0];
+	var v = qString[q].split('=')[1];
+	if(k === 'status'){
+		loginBadge.innerHTML = v;
+	}
+	else if(k === 'confidence'){
+		confidenceBadge.innerHTML = v;
+	}
+};
+
+//loginBadge.innerHTML = ;
+//confidenceBadge.innerHTML = ;
+
 // Display user name
 var displayName = document.getElementById('userName');
 displayName.innerHTML = myMugin.currentUser.nameFirst;
@@ -112,4 +130,5 @@ for(var i = 0; i < f.elements.length; i++){
     	break;
     }
 }
+
 

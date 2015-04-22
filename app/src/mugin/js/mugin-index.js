@@ -62,7 +62,7 @@ function panelUi(validateResponse){
 			loginBadge.innerHTML = 'Logged In';
 			var newUser = {"user" : { "status" : 'true' }};
 			setCookie('user', JSON.stringify(newUser) );
-			window.location = '/#/profile';
+			window.location = '/#/profile?status=loggedin&confidence='+validateResponse.confidence;
 		}
 		else{
 			// Set confidence 
