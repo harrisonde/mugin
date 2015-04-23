@@ -82,27 +82,31 @@ var Mugin = function(defaults){
 		var publicMug = this.getMug('public') || null;
 		var misMatchPercentageLimit = this.defaults.constraints.mugMatchLimit;
 		var isMatch = null;
-
+		var haveMugs = privateMug && publicMug ? true : false;
 		var calcConfidenceScore = function(misMatchPercentage){
 			return Math.floor(100.00 - misMatchPercentage);
 		}
 		var howConfidence = null;
+		if(haveMugs){
+			// Comparison by Huddle @ https://github.com/Huddle/Resemble.js
+			resemble(privateMug).compareTo(publicMug).ignoreColors().onComplete(function(data){
 
-		// Comparison by Huddle @ https://github.com/Huddle/Resemble.js
-		resemble(privateMug).compareTo(publicMug).ignoreColors().onComplete(function(data){
-
-			self.results.mugMatchConf = calcConfidenceScore(data.misMatchPercentage);
-				
-			if(misMatchPercentageLimit >= parseInt(data.misMatchPercentage)){
-				self.results.mugMatch = true;
-				pass();
-			}
-			else{
-				self.results.mugMatch = false;
-				fail();
-			}
-		
-		});
+				self.results.mugMatchConf = calcConfidenceScore(data.misMatchPercentage);
+					
+				if(misMatchPercentageLimit >= parseInt(data.misMatchPercentage)){
+					self.results.mugMatch = true;
+					pass();
+				}
+				else{
+					self.results.mugMatch = false;
+					fail();
+				}
+			
+			});
+		}
+		else{
+			fail();
+		}
 	},
 
 	this.getMug = function(mugType){
