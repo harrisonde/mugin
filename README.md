@@ -9,7 +9,7 @@ Mugin makes loging into your web applicaions dead simple, just use your mug.
 		1. $ bower install
 	4. Deploy
 		1. $ grunt deploy
-	5. Open your favorite flavor of web browser and navigate to 10.0.0.10
+	5. Open your favorite flavor of web browser and navigate to 192.168.22.10
 
 ## Features
 	1. Image comparison 
