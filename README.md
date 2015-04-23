@@ -67,4 +67,4 @@ Create and configure portable development environments. More @ (Vagrant)[https:/
 Va​grant Pro​visioning Bash Scripts. More @ (Vaprobash)[http://fideloper.github.io/Vaprobash/index.html]
 
 ## Support
-At the time of building Mugin getusermedia is in early adption. Thus, support for core functionality of Mugin is spotty. Please make reference to (caniuse)[http://caniuse.com/#feat=stream] for web browser support. 
+At the time of building Mugin getusermedia is in early adption. Thus, support for core functionality of Mugin is spotty. Please make reference to [caniuse](http://caniuse.com/#feat=stream) for web browser support. 
