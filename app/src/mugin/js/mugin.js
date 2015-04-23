@@ -32,6 +32,13 @@ var Mugin = function(defaults){
 
 	},
 
+	this.results = {
+
+		mugMatch : false, 
+
+		mugMatchConf : 0
+	}
+
 	this.go = function(){
 		/* 
 		* Prompts the user for permission to use a media device such as a camera or microphone. 
@@ -67,35 +74,34 @@ var Mugin = function(defaults){
 	
 	},
 
-	this.validate = function(publicMug){
+	this.validate = function(onSuccess){
 		
 		// Private Variables
+		var self = this;
 		var privateMug = this.getMug('private') || null;
 		var publicMug = this.getMug('public') || null;
 		var misMatchPercentageLimit = this.defaults.constraints.mugMatchLimit;
 		var isMatch = null;
+
 		var calcConfidenceScore = function(misMatchPercentage){
-			return 100.00 - misMatchPercentage;
+			return Math.floor(100.00 - misMatchPercentage);
 		}
 		var howConfidence = null;
 
 		// Comparison by Huddle @ https://github.com/Huddle/Resemble.js
 		resemble(privateMug).compareTo(publicMug).ignoreColors().onComplete(function(data){
-			
-			// The difference score
-			howConfidence = calcConfidenceScore(data.misMatchPercentage);
+
+			self.results.mugMatchConf = calcConfidenceScore(data.misMatchPercentage);
 				
-			// Boolean 
 			if(misMatchPercentageLimit >= parseInt(data.misMatchPercentage)){
-				isMatch = true;
+				self.results.mugMatch = true;
 			}
 			else{
-				isMatch = false;
+				self.results.mugMatch = false;
+				onSuccess();
 			}
+		
 		});
-		
-		return {match: isMatch, confidence: howConfidence };
-		
 	},
 
 	this.getMug = function(mugType){

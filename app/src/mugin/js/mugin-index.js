@@ -66,15 +66,21 @@ function validate(){
 		    }
 	    }
 	}
+
 	// Validate mug
-	var validateResponse = myMugin.validate();
-	if(!validateResponse){
+	var callback = function(){ 
+		var newUser = {"user" : { "status" : 'true' }};
+		setCookie('user', JSON.stringify(newUser) );
+		console.log(validateResponse);
+		window.location = '/#/profile?status=loggedin&confidence='+myMugin.results.mugMatchConf;
+	};
+
+	var validateResponse = myMugin.validate(callback);
+	if(validateResponse.match === false){
 		errors.push('We can not verify your mug.');
 	}
-	
-	// Check and display Errors
-	if(errors.length > 0){
-		
+		// Check and display Errors
+	if(errors.length > 0){		
 		// Clear old errors
 		var oldErrorElm = document.getElementById('message');
 		if(oldErrorElm){
@@ -97,10 +103,5 @@ function validate(){
 		var body = document.getElementById('login'); 
 			body.insertBefore(newDiv, body.childNodes[0]);
 			window.scrollTo(0, 0);
-	}
-	else{
-		var newUser = {"user" : { "status" : 'true' }};
-		setCookie('user', JSON.stringify(newUser) );
-		window.location = '/#/profile?status=loggedin&confidence='+validateResponse.confidence;
-	}
+	}		
 };
