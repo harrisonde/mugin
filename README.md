@@ -29,6 +29,8 @@ Mugin makes loging into your web applicaions dead simple, just use your mug.
 ## Development List Items
 	* [X] Style register validatoin errors
 	* [X] Add favicon to project root
+	* [ ] Handle if user trys to login without registering first
+	* [ ] Firefox - user mug is not full size
 	* [X] Login in with mug and email
 	* [ ] Do not show login form if logged in (redirect to profile);
 	* [X] Disable inputs on profile

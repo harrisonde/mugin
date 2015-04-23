@@ -74,7 +74,7 @@ var Mugin = function(defaults){
 	
 	},
 
-	this.validate = function(onSuccess){
+	this.validate = function(pass, fail){
 		
 		// Private Variables
 		var self = this;
@@ -95,10 +95,11 @@ var Mugin = function(defaults){
 				
 			if(misMatchPercentageLimit >= parseInt(data.misMatchPercentage)){
 				self.results.mugMatch = true;
+				pass();
 			}
 			else{
 				self.results.mugMatch = false;
-				onSuccess();
+				fail();
 			}
 		
 		});

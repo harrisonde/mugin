@@ -66,20 +66,7 @@ function validate(){
 		    }
 	    }
 	}
-
-	// Validate mug
-	var callback = function(){ 
-		var newUser = {"user" : { "status" : 'true' }};
-		setCookie('user', JSON.stringify(newUser) );
-		console.log(validateResponse);
-		window.location = '/#/profile?status=loggedin&confidence='+myMugin.results.mugMatchConf;
-	};
-
-	var validateResponse = myMugin.validate(callback);
-	if(validateResponse.match === false){
-		errors.push('We can not verify your mug.');
-	}
-		// Check and display Errors
+	// Check and display Errors
 	if(errors.length > 0){		
 		// Clear old errors
 		var oldErrorElm = document.getElementById('message');
@@ -103,5 +90,35 @@ function validate(){
 		var body = document.getElementById('login'); 
 			body.insertBefore(newDiv, body.childNodes[0]);
 			window.scrollTo(0, 0);
-	}		
+	} 
+	else {
+		// Validate mug
+		var pass = function(){ 
+			var newUser = {"user" : { "status" : 'true' }};
+			setCookie('user', JSON.stringify(newUser) );
+			window.location = '/#/profile?status=loggedin&confidence='+myMugin.results.mugMatchConf;
+		};
+
+		var fail = function(){
+			// Clear old errors
+			var oldErrorElm = document.getElementById('message');
+			if(oldErrorElm){
+				oldErrorElm.remove();
+			}
+			// Display errors
+			var newDiv = document.createElement('ul'); 
+			newDiv.setAttribute('id', 'message');
+			newDiv.setAttribute('class', 'alert alert-danger');
+			var newListItem = document.createElement('li');
+			var newError = document.createTextNode('We can not verify your mug.'); 
+			newListItem.appendChild(newError);
+			newDiv.appendChild(newListItem);
+			var body = document.getElementById('login'); 
+			body.insertBefore(newDiv, body.childNodes[0]);
+			window.scrollTo(0, 0);
+		}
+		myMugin.validate(pass, fail);
+	}
+	
+
 };
