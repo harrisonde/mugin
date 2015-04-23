@@ -29,7 +29,7 @@ Mugin makes loging into your web applicaions dead simple, just use your mug.
 ## Development List Items
 	* [X] Style register validatoin errors
 	* [X] Add favicon to project root
-	* [ ] Handle if user trys to login without registering first
+	* [X] Handle if user trys to login without registering first
 	* [ ] Firefox - user mug is not full size
 	* [X] Login in with mug and email
 	* [ ] Do not show login form if logged in (redirect to profile);
@@ -37,7 +37,6 @@ Mugin makes loging into your web applicaions dead simple, just use your mug.
 	* [X] Pass mugin stats in url
 	* [X] Read mugin stats from url into UI
 	* [X] Display validaion errors on index when loggin
-	* [ ] Remove CTRL after eval
 	* [ ] Refactor message and waring for DRY code
 
 ##Packages
@@ -66,3 +65,6 @@ Create and configure portable development environments. More @ (Vagrant)[https:/
 
 ###Vaprobash
 Va​grant Pro​visioning Bash Scripts. More @ (Vaprobash)[http://fideloper.github.io/Vaprobash/index.html]
+
+## Support
+At the time of building Mugin getusermedia is in early adption. Thus, support for core functionality of Mugin is spotty. Please make reference to (caniuse)[http://caniuse.com/#feat=stream] for web browser support. 
