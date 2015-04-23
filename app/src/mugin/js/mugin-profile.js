@@ -103,10 +103,7 @@ for(var q in qString){
 	else if(k === 'confidence'){
 		confidenceBadge.innerHTML = v;
 	}
-};
-
-//loginBadge.innerHTML = ;
-//confidenceBadge.innerHTML = ;
+}; 
 
 // Display user name
 var displayName = document.getElementById('userName');
