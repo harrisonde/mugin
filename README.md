@@ -14,8 +14,8 @@ Mugin makes loging into your web applicaions dead simple, just use your mug.
 ## Features
 	1. Image comparison 
 	2. Image capture
-	3. Access to image(s) and data from [local storage object](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
-	4. Custom router to analyze resource request, make XMLHttpRequest [AJAX](http://www.w3schools.com/ajax/default.asp), and parse HTML markup.
+	3. Access to image and data from local storage
+	4. Custom applicaion routing 
 
 ### Requriments	
 	* [X] DOM element creation
