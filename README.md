@@ -12,9 +12,10 @@ Mugin makes loging into your web applicaions dead simple, just use your mug.
 	5. Open your favorite flavor of web browser and navigate to 10.0.0.10
 
 ## Features
-	*Capture image from webcam using [WebRTC](https://developer.mozilla.org/en-US/docs/Web/Guide/API/WebRTC)
-	*Access to image(s) and data from [local storage object](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
-	*Custom router to analyze resource request, make XMLHttpRequest [AJAX](http://www.w3schools.com/ajax/default.asp), and parse HTML markup.
+	1. Image comparison 
+	2. Image capture
+	3. Access to image(s) and data from [local storage object](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
+	4. Custom router to analyze resource request, make XMLHttpRequest [AJAX](http://www.w3schools.com/ajax/default.asp), and parse HTML markup.
 
 ### Requriments	
 	* [X] DOM element creation
