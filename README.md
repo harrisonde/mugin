@@ -8,7 +8,8 @@ To get started, create a user profile by choosing “Sign Up” from the landing
 	1. Start the virtual machine 
 		1. $ vagrant up
 	2. Dependencies
-		1. $ bower install
+		1. $ npm install
+		2. $ bower install
 	3. Deploy
 		1. $ grunt deploy
 	4. Open your favorite flavor of web browser and navigate to 192.168.22.10
