@@ -67,19 +67,3 @@ Va​grant Pro​visioning Bash Scripts. More @ (Vaprobash)[http://fideloper.git
 	* [X] From Validation
 	* [X] Closures
 	* [X] AJAX
-
-### Development List Items
-	* [X] Style register validatoin errors
-	* [X] Add favicon to project root
-	* [X] Basic CSS
-	* [X] Handle if user trys to login without registering first
-	* [ ] Firefox - user mug is not full size
-	* [X] Login in with mug and email
-	* [ ] Do not show login form if logged in (redirect to profile);
-	* [X] Disable inputs on profile
-	* [X] Pass mugin stats in url
-	* [X] Read mugin stats from url into UI
-	* [X] Display validaion errors on index when loggin
-	* [ ] Validate email address when reg for mug
-	* [ ] email address might need to be lowercase or save as lower case when reg for mug
-	* [ ] Refactor message and waring for DRY code
