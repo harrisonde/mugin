@@ -1,14 +1,19 @@
 <CTRL src="/js/mugin/mugin-profile.js"></CTRL>
-<div id="registration" class="container">
+<div  id="nav" class="bg-primary">
+	<h4 class="pull-left">Mugin</h4>
+	<a class="pull-right logout" href="">Logout</a>
+	<div class="pull-right user">Welcome back, <span class="userName"></span></div>
+</div>
+<div id="profile" class="container">
 	<div class="row">
 	<div class="col-sm-12">
-		<h1>Hey, <span id="userName"></span></h1>
+		<h1>Hey, <span class="userName"></span></h1>
 	</div>
 	</div>
 	<div class="row">
 		<div class="col-sm-7">
 			<!-- Login form -->
-			<form class="form-horizontal" novalidate onsubmit="return false;">
+			<form class="form-horizontal" novalidate>
 				<div class="form-group">
 					<div class="col-sm-11 col-sm-offset-1">
 						<h2>My Profile</h2>
@@ -58,4 +63,13 @@
 			</div>
 		</div>		
 	</div>
+</div>
+<div id="footer">
+	<div class="row">
+		<div class="col-sm-12 text-center">
+			<span class="circle">	
+				<h6>Mugin</h6>
+			</span>	
+		</div>
+	</div>	
 </div>

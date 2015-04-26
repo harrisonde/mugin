@@ -93,7 +93,7 @@ module.exports = function(grunt) {
 		*/
 		watch: {
 			css: {
-				files: ['<%= app.srcDir %>/app/**/*.less', '<%= app.srcDir %>/vendors/bootstrap/less/**/*.less'],
+				files: ['<%= app.srcDir %>/less/layout/**/*.less', '<%= app.srcDir %>/vendors/bootstrap/less/**/*.less'],
 				// files: '**/*.less',
 				tasks: ['less:style']
 			}

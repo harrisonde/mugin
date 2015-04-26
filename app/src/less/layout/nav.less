@@ -1,0 +1,31 @@
+/*
+  nav.less
+*/
+
+// Navigation container // --------------------------------------------------
+#nav {
+	background: @app-gray;
+	border-bottom: 1px solid @app-gray-dark;
+	color: @app-black;
+	height: 51px;
+	padding: 15px 15px 0 11px;
+	width: 100%;
+
+	h1,
+	h2,
+	h3,
+	h4 {
+		margin-top: 0;
+	}
+	
+	.logout{
+		&:active,
+		&:hover{
+			color: @app-blue;
+			text-decoration: none;
+		}
+		color: lighten(@app-black, 10%);
+		font-weight: bold;
+		margin: 0 15px 0 15px;
+	}
+}

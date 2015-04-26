@@ -2,11 +2,17 @@
   App.less
 */
 
+// Bootstrap // --------------------------------------------------
+@bootstrap: "app/src/vendors/bootstrap/less";
+@import "@{bootstrap}/mixins.less"; //to be able to use boostrap mixins
+
 // Core // --------------------------------------------------
-// @import "app/src/less/core/"
+@import "app/src/less/core/variables";
 
 // Layout // --------------------------------------------------
 @import "app/src/less/layout/list";
+@import "app/src/less/layout/footer";
+@import "app/src/less/layout/nav";
 
 // Mixins // --------------------------------------------------
 // @import "app/src/less/mixins/

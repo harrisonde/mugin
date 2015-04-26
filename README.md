@@ -11,6 +11,8 @@ Mugin makes loging into your web applicaions dead simple, just use your mug.
 		1. $ grunt deploy
 	5. Open your favorite flavor of web browser and navigate to 192.168.22.10
 
+## Usage
+
 ## Features
 	1. Image comparison 
 	2. Image capture
@@ -29,6 +31,7 @@ Mugin makes loging into your web applicaions dead simple, just use your mug.
 ## Development List Items
 	* [X] Style register validatoin errors
 	* [X] Add favicon to project root
+	* [X] Basic CSS
 	* [X] Handle if user trys to login without registering first
 	* [ ] Firefox - user mug is not full size
 	* [X] Login in with mug and email
@@ -37,6 +40,7 @@ Mugin makes loging into your web applicaions dead simple, just use your mug.
 	* [X] Pass mugin stats in url
 	* [X] Read mugin stats from url into UI
 	* [X] Display validaion errors on index when loggin
+	* [ ] Validate email address when reg for mug
 	* [ ] Refactor message and waring for DRY code
 
 ##Packages

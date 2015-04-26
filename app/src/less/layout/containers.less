@@ -1,0 +1,33 @@
+/*
+  containers.less
+*/
+
+// Major container // --------------------------------------------------
+#footer,
+#nav{
+	&#footer{
+		border-top: 1px solid @app-gray-dark;
+	}
+	&#nav{
+		background: #f5f5f5;
+		border-bottom: 1px solid #EBEBEB;
+		padding: 15px 15px 0 11px;
+		h4{
+			margin-top: 0;
+		}
+		.logout{
+			&:active,
+			&:hover{
+				color: #337ab7;
+				text-decoration: none;
+			}
+			color: lighten(#3A3A3A, 10%);
+			font-weight: bold;
+			margin: 0 15px 0 15px;
+		}
+	}
+	color: @app-black;
+	padding: 3px 0 0 11px;
+	height: 51px;
+	width: 100%;
+}

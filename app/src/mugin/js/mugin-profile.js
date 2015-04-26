@@ -106,8 +106,11 @@ for(var q in qString){
 }; 
 
 // Display user name
-var displayName = document.getElementById('userName');
-displayName.innerHTML = myMugin.currentUser.nameFirst;
+var displayName = document.getElementsByClassName('userName');
+for(var i = 0; i < displayName.length; i++){
+	//console.log(displayName[el]);
+	displayName[i].innerHTML = myMugin.currentUser.nameFirst;
+}
 
 // Add user informatoin to the form
 var f = document.forms[0];
