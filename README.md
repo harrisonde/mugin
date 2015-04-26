@@ -29,30 +29,8 @@ Mugin preforms two factor authentication using email addresses and images. The e
 ###Routing
 Mugin is a single page application where each route is lazy loaded. The resources required get complied after the route is resolved.
 
-### Requriments	
-	* [X] DOM element creation
-	* [X] DOM traversal
-	* [X] Capture and handling events
-	* [X] Create and handling a data structure (JSON, custom objects, etc)
-	* [X] From Validation
-	* [X] Closures
-	* [X] AJAX
-
-## Development List Items
-	* [X] Style register validatoin errors
-	* [X] Add favicon to project root
-	* [X] Basic CSS
-	* [X] Handle if user trys to login without registering first
-	* [ ] Firefox - user mug is not full size
-	* [X] Login in with mug and email
-	* [ ] Do not show login form if logged in (redirect to profile);
-	* [X] Disable inputs on profile
-	* [X] Pass mugin stats in url
-	* [X] Read mugin stats from url into UI
-	* [X] Display validaion errors on index when loggin
-	* [ ] Validate email address when reg for mug
-	* [ ] email address might need to be lowercase or save as lower case when reg for mug
-	* [ ] Refactor message and waring for DRY code
+### Support
+At the time of building Mugin getusermedia is in early adption. Thus, support for core functionality of Mugin is spotty. Please make reference to [caniuse](http://caniuse.com/#feat=stream) for web browser support. 
 
 ##Packages
 Several packages were used in the making of this JavaScript application. All are awesome because each is open source - go community!
@@ -81,5 +59,28 @@ Create and configure portable development environments. More @ (Vagrant)[https:/
 ###Vaprobash
 Va​grant Pro​visioning Bash Scripts. More @ (Vaprobash)[http://fideloper.github.io/Vaprobash/index.html]
 
-## Support
-At the time of building Mugin getusermedia is in early adption. Thus, support for core functionality of Mugin is spotty. Please make reference to [caniuse](http://caniuse.com/#feat=stream) for web browser support. 
+## Developer Notes
+### Requriments	
+	* [X] DOM element creation
+	* [X] DOM traversal
+	* [X] Capture and handling events
+	* [X] Create and handling a data structure (JSON, custom objects, etc)
+	* [X] From Validation
+	* [X] Closures
+	* [X] AJAX
+
+### Development List Items
+	* [X] Style register validatoin errors
+	* [X] Add favicon to project root
+	* [X] Basic CSS
+	* [X] Handle if user trys to login without registering first
+	* [ ] Firefox - user mug is not full size
+	* [X] Login in with mug and email
+	* [ ] Do not show login form if logged in (redirect to profile);
+	* [X] Disable inputs on profile
+	* [X] Pass mugin stats in url
+	* [X] Read mugin stats from url into UI
+	* [X] Display validaion errors on index when loggin
+	* [ ] Validate email address when reg for mug
+	* [ ] email address might need to be lowercase or save as lower case when reg for mug
+	* [ ] Refactor message and waring for DRY code
