@@ -130,5 +130,3 @@ for(var i = 0; i < f.elements.length; i++){
     	break;
     }
 }
-
-

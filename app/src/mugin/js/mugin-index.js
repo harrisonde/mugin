@@ -8,6 +8,9 @@
 * mugin.js
 * April 11, 2015
 ***************************************************************************/
+
+'use strict'
+
 // Use constructor method to create a new mugin
 var myMugin = new Mugin();
 
@@ -119,6 +122,4 @@ function validate(){
 		}
 		myMugin.validate(pass, fail);
 	}
-	
-
 };

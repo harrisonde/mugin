@@ -44,6 +44,7 @@ var Mugin = function(defaults){
 		* Prompts the user for permission to use a media device such as a camera or microphone. 
 		* If the user provides permission, the successCallback is invoked on the calling 
 		* application with a LocalMediaStream object as its argument.
+		* This is the method suggested by WebRTC @ https://github.com/webrtc/samples/blob/master/src/content/getusermedia/canvas/js/main.js
 		*/	
 		navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 		
