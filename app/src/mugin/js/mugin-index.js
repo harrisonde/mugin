@@ -31,9 +31,9 @@ if(getCookie('registration') !== 1){
 	newDiv.setAttribute('id', 'message');
 	newDiv.setAttribute('class', 'alert alert-success');
 	var newMessage = document.createTextNode('Success! Please use your mug to login.'); 
-		newDiv.appendChild(newMessage);
+	newDiv.appendChild(newMessage);
 	var body = document.getElementById('login'); 
-		body.insertBefore(newDiv, body.childNodes[0]);
+	body.insertBefore(newDiv, body.childNodes[0]);
 }
 
 myMugin.history = {
@@ -87,8 +87,8 @@ function validate(){
 		for(var err in errors){
 			var newListItem = document.createElement('li');
 			var newError = document.createTextNode(errors[err]); 
-				newListItem.appendChild(newError);
-				newDiv.appendChild(newListItem);
+			newListItem.appendChild(newError);
+			newDiv.appendChild(newListItem);
 		}
 		var body = document.getElementById('login'); 
 			body.insertBefore(newDiv, body.childNodes[0]);

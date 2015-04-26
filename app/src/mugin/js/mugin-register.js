@@ -148,19 +148,20 @@ function validate(){
 	    			errors.push('First name is required');
 	    		}
 	    	break;
-	    	
 	    	case 'nameLast':
 	    		if(f[i].value.length === 0){
 	    			errors.push('Last name is required');
 	    		}
-	    	break;
-	    	
+	    	break;   	
 	    	case 'email':
+	    		var regex = /@{1}/;
 	    		if(f[i].value.length === 0){
 	    			errors.push('Email is required');
 	    		}
+	    		else if(!regex.test(f[i].value)){
+	    			errors.push('Email is invalid');	
+	    		}
 	    	break;
-
 	    	case 'email-confirm':
 	    		if(f[i].value.length === 0){
 	    			errors.push('Email confirmation is required.');
