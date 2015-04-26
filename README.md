@@ -2,7 +2,7 @@
 Loging into your web applicaions is dead simple, just use your mug.
 
 ## Usage
-To get started, first create a user profile by choosing “Sign Up” from the landing page. Once on the signup page, complete the registration form by entering the required information. Upon successfull registration, allow access to the web camera and login to the application. If successful, a user profile view will render.  
+To get started, create a user profile by choosing “Sign Up” from the landing page. Once on the signup page, complete the registration form by entering the required information. Upon successfull registration, allow access to the web camera and login to the application. If successful, a user profile view will render.  
 
 ## Install
 	1. Start the virtual machine 
