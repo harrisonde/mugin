@@ -18,7 +18,7 @@ var Mugin = function(defaults){
 				audio: false,
 	  			video: true
 	  		},
-	  		mugMatchLimit : 65 
+	  		mugMatchLimit : 25 
 		},	
 		el : function(){ return document.querySelector('video') }
 	},
