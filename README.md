@@ -1,5 +1,5 @@
 # Mugin
-Mugin makes loging into your web applicaions dead simple, just use your mug.
+Loging into your web applicaions is dead simple, just use your mug.
 
 ## Automagic Install
 	1. Open Terminal and cd the mugin directory
@@ -12,12 +12,22 @@ Mugin makes loging into your web applicaions dead simple, just use your mug.
 	5. Open your favorite flavor of web browser and navigate to 192.168.22.10
 
 ## Usage
+To get started, first create a user profile by choosing “Sign Up” from the landing page. Once on the signup page, complete the registration form by entering the required information. Upon successfull registration, allow access to the web camera and login to the application. If successful, a user profile view will render.  
 
 ## Features
 	1. Image comparison 
 	2. Image capture
 	3. Access to image and data from local storage
 	4. Custom applicaion routing 
+
+## The “Black Box” demystified
+Mugin is simple client-side web application that allows a user to login using a email address and image. It is constructed with CSS3, HTML5, and JavaScript.  
+
+###Authentication
+Mugin preforms two factor authentication using email addresses and images. The email addresses are analyzed by way of a case insensitive comparison. Images are analyzed for similarities and a difference score is computed. 
+
+###Routing
+Mugin is a single page application where each route is lazy loaded. The resources required get complied after the route is resolved.
 
 ### Requriments	
 	* [X] DOM element creation
@@ -41,6 +51,7 @@ Mugin makes loging into your web applicaions dead simple, just use your mug.
 	* [X] Read mugin stats from url into UI
 	* [X] Display validaion errors on index when loggin
 	* [ ] Validate email address when reg for mug
+	* [ ] email address might need to be lowercase or save as lower case when reg for mug
 	* [ ] Refactor message and waring for DRY code
 
 ##Packages
